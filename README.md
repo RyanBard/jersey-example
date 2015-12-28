@@ -2,6 +2,9 @@
 
 This is just a hacked together version of jersey's maven archetype to test my template files with.
 
+# all in one build command
+mvn clean install exec:java
+
 # get all
 curl -v -X GET 'http://localhost:8080/myapp/api/todo'
 
