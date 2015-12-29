@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.codahale.metrics.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +41,7 @@ public class MockUserDao implements UserDao {
     }
 
     @Override
+    @Timed
     public User getById(
             @Nonnull String id
     ) {
@@ -51,12 +53,14 @@ public class MockUserDao implements UserDao {
     }
 
     @Override
+    @Timed
     public List<User> getAll() {
         LOGGER.debug("getAll called");
         return new ArrayList<>(dataStore.values());
     }
 
     @Override
+    @Timed
     public String create(
             @Nonnull User toCreate
     ) {
@@ -69,6 +73,7 @@ public class MockUserDao implements UserDao {
     }
 
     @Override
+    @Timed
     public void update(
             @Nonnull User toUpdate
     ) {
@@ -77,6 +82,7 @@ public class MockUserDao implements UserDao {
     }
 
     @Override
+    @Timed
     public void delete(
             @Nonnull String id
     ) {
