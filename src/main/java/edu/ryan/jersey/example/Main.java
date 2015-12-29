@@ -22,7 +22,9 @@ public class Main {
     public static HttpServer startServer() {
         // create a resource config that scans for JAX-RS resources and providers
         // in edu.ryan.jersey.example package
-        final ResourceConfig rc = new ResourceConfig().packages("edu.ryan.jersey.example");
+        ResourceConfig rc = new ResourceConfig().packages("edu.ryan.jersey.example");
+
+        rc.register(new GuiceBridgeContainerLifecycleListener());
 
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
@@ -41,4 +43,5 @@ public class Main {
         System.in.read();
         server.stop();
     }
+
 }
