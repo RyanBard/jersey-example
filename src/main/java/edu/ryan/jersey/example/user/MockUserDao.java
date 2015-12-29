@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static java.util.Objects.requireNonNull;
 
 
@@ -15,6 +18,8 @@ import static java.util.Objects.requireNonNull;
  * A mock implementation of {@link UserDao} that uses a {@link Map} for its datastore.
  */
 public class MockUserDao implements UserDao {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MockUserDao.class);
 
     private final AtomicInteger idSequence;
     private final Map<String, User> dataStore;
@@ -38,6 +43,7 @@ public class MockUserDao implements UserDao {
     public User getById(
             @Nonnull String id
     ) {
+        LOGGER.debug("getById called, id={}", id);
         if (!dataStore.containsKey(requireNonNull(id))) {
             throw new RuntimeException("not found: " + id);
         }
@@ -46,6 +52,7 @@ public class MockUserDao implements UserDao {
 
     @Override
     public List<User> getAll() {
+        LOGGER.debug("getAll called");
         return new ArrayList<>(dataStore.values());
     }
 
@@ -53,6 +60,7 @@ public class MockUserDao implements UserDao {
     public String create(
             @Nonnull User toCreate
     ) {
+        LOGGER.debug("create called, toCreate={}", toCreate);
         requireNonNull(toCreate);
         String id = "" + idSequence.incrementAndGet();
         toCreate.setId(id);
@@ -64,6 +72,7 @@ public class MockUserDao implements UserDao {
     public void update(
             @Nonnull User toUpdate
     ) {
+        LOGGER.debug("update called, toUpdate={}", toUpdate);
         dataStore.put(toUpdate.getId(), toUpdate);
     }
 
@@ -71,6 +80,7 @@ public class MockUserDao implements UserDao {
     public void delete(
             @Nonnull String id
     ) {
+        LOGGER.debug("delete called, id={}", id);
         dataStore.remove(requireNonNull(id));
     }
 
