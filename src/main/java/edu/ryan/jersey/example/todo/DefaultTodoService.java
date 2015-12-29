@@ -1,10 +1,10 @@
-package edu.ryan.jersey.example;
+package edu.ryan.jersey.example.todo;
 
 import javax.inject.Inject;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class DefaultTodoService implements TodoService {

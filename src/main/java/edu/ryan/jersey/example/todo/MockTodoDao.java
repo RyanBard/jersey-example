@@ -1,11 +1,14 @@
-package edu.ryan.jersey.example;
+package edu.ryan.jersey.example.todo;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static java.util.Objects.requireNonNull;
 
 
 public class MockTodoDao implements TodoDao {
@@ -15,18 +18,18 @@ public class MockTodoDao implements TodoDao {
 
     @Inject
     public MockTodoDao(
-        AtomicInteger idSequence,
-        Map<String, Todo> dataStore
+            @Nonnull AtomicInteger idSequence,
+            @Nonnull Map<String, Todo> dataStore
     ) {
-        this.idSequence = idSequence;
-        this.dataStore = dataStore;
+        this.idSequence = requireNonNull(idSequence);
+        this.dataStore = requireNonNull(dataStore);
     }
 
     @Override
     public Todo getById(
-        String id
+            @Nonnull String id
     ) {
-        if (!dataStore.containsKey(id)) {
+        if (!dataStore.containsKey(requireNonNull(id))) {
             throw new RuntimeException("not found: " + id);
         }
         return dataStore.get(id);
@@ -39,8 +42,9 @@ public class MockTodoDao implements TodoDao {
 
     @Override
     public String create(
-        Todo o
+            @Nonnull Todo o
     ) {
+        requireNonNull(o);
         String id = "" + idSequence.incrementAndGet();
         // TODO - set the ID in the object before putting into the map
         o.setId(id);
@@ -49,18 +53,17 @@ public class MockTodoDao implements TodoDao {
     }
 
     @Override
-    public Todo update(
-        Todo o
+    public void update(
+            @Nonnull Todo o
     ) {
         dataStore.put(o.getId(), o);
-        return o;
     }
 
     @Override
     public void delete(
-        String id
+            @Nonnull String id
     ) {
-        dataStore.remove(id);
+        dataStore.remove(requireNonNull(id));
     }
 
 }

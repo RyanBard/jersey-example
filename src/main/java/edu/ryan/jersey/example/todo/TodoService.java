@@ -1,15 +1,15 @@
-package edu.ryan.jersey.example;
+package edu.ryan.jersey.example.todo;
 
 import java.util.List;
 
 
-public interface TodoDao {
+public interface TodoService {
 
     Todo getById(String id);
 
     List<Todo> getAll();
 
-    String create(Todo o);
+    Todo create(Todo o);
 
     Todo update(Todo o);
 
