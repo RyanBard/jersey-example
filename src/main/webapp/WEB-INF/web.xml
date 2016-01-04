@@ -9,12 +9,40 @@
 
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>edu.ryan.jersey.example.HelloServlet</servlet-class>
+        <servlet-class>edu.ryan.jersey.example.ServletForJetty</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>jerseyApplication</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.Application</param-name>
+            <param-value>edu.ryan.jersey.example.JerseyApplicationConfig</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>jerseyApplication</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>guiceFilter</filter-name>
+        <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>guiceFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>edu.ryan.jersey.example.GuiceServletConfig</listener-class>
+    </listener>
 
 </web-app>

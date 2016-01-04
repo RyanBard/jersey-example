@@ -1,5 +1,7 @@
 package edu.ryan.jersey.example;
 
+import javax.inject.Singleton;
+
 import edu.ryan.jersey.example.user.UserGuiceModule;
 
 import com.codahale.metrics.MetricRegistry;
@@ -26,6 +28,7 @@ public class MainGuiceModule extends AbstractModule {
     protected void configure() {
         install(new MetricsInstrumentationModule(metricRegistry));
         install(new UserGuiceModule());
+        bind(ServletForGuice.class).in(Singleton.class);
     }
 
 }

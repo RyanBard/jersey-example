@@ -14,9 +14,13 @@ import org.slf4j.LoggerFactory;
 /**
  * An example servlet to test wiring of my web.xml + jetty + executable war.
  */
-public class HelloServlet extends HttpServlet {
+public class ServletForJetty extends HttpServlet {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(HelloServlet.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ServletForJetty.class);
+
+    public ServletForJetty() {
+        LOGGER.info("instantiating ServletForJetty");
+    }
 
     @Override
     public void doGet(
@@ -27,11 +31,11 @@ public class HelloServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("<html>");
         out.println("    <head>");
-        out.println("        <title>Hello</title>");
+        out.println("        <title>Hello Jetty</title>");
         out.println("    </head>");
         out.println("    <body>");
         out.println("        <div>");
-        out.println("            hello!");
+        out.println("            hello-jetty!");
         out.println("        </div>");
         out.println("    </body>");
         out.println("</html>");

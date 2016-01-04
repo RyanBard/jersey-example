@@ -16,6 +16,7 @@ import org.eclipse.jetty.webapp.WebAppContext;
  * and pruned it to only what I thought I needed.
  */
 public class Main {
+
     public static void main(String[] args) throws Exception {
         Server server = new Server();
 
@@ -41,4 +42,5 @@ public class Main {
         server.start();
         server.join();
     }
+
 }
