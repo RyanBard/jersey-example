@@ -12,7 +12,7 @@
     <properties>
         <slf4j.version>1.7.13</slf4j.version>
         <guice.version>3.0</guice.version>
-        <jersey.version>2.0</jersey.version> <!-- 2.22.1 is the latest release, but doesn't seem to work with the bridge -->
+        <jersey.version>2.6</jersey.version> <!-- 2.22.1 is the latest release, but doesn't seem to work with the bridge -->
         <hk2.guice.bridge.version>2.1.93</hk2.guice.bridge.version>
         <jackson.version>1.9.???</jackson.version>
     </properties>
@@ -164,7 +164,7 @@
                             <tasks>
                                 <move todir="${project.build.directory}/${project.artifactId}-${project.version}/">
                                     <fileset dir="${project.build.directory}/classes/">
-                                        <include name="Main.class" />
+                                        <include name="Main.class"/>
                                     </fileset>
                                 </move>
                             </tasks>
